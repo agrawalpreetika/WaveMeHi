@@ -28,7 +28,7 @@ body {
     height: 100vh; /* Full height of the viewport */
     background: linear-gradient(135deg, #8e44ad, #3498db, #2c3e50); /* Gradient background */
     background-size: 200% 200%;
-    animation: gradientAnimation 10s infinite linear ; /* Animated gradient */
+    animation: gradientAnimation 5s infinite linear ; /* Animated gradient */
 }
 
 @keyframes gradientAnimation {
