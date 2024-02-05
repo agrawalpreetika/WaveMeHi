@@ -42,6 +42,7 @@
             <div class="video-container">
                 <h1>Sign Language Detection</h1> 
                 <div id="webcam-container"></div>
+                <div id="highest-prediction"></div>
                 <div id="label-container"></div>
                 <button class="video" type="button" onclick="init()">Start</button>
             </div> 
@@ -84,6 +85,7 @@
                 labelContainer.appendChild(document.createElement("div"));
             }
         }
+        
     
         async function loop() {
             webcam.update(); // update the webcam frame
@@ -91,16 +93,30 @@
             window.requestAnimationFrame(loop);
         }
     
-        // run the webcam image through the image model
+        
         async function predict() {
-            // predict can take in an image, video or canvas html element
-            const prediction = await model.predict(webcam.canvas);
-            for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction =
-                    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+        // predict can take in an image, video, or canvas html element
+        const predictions = await model.predict(webcam.canvas);
+
+        // Display the letter with the highest probability
+        let highestProbability = 0;
+        let highestIndex = 0;
+        for (let i = 0; i < maxPredictions; i++) {
+            const probability = predictions[i].probability.toFixed(2);
+            const classPrediction = predictions[i].className + ": " + probability;
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+
+            if (probability > highestProbability) {
+                highestProbability = probability;
+                highestIndex = i;
             }
         }
+
+        // Display only the letter with the highest probability
+        const highestPrediction = predictions[highestIndex].className;
+        document.getElementById("highest-prediction").innerHTML = `Highest Prediction: ${highestPrediction}`;
+    }
+    
     </script>
     
 </html>
