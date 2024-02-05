@@ -164,6 +164,7 @@ button:hover {
     height: 100vh;
     background-image: linear-gradient(#8a5082,#6f5f90);
     color: #fff;
+    overflow:sroll;
 }
 
 .video-container {
