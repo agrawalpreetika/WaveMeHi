@@ -193,7 +193,4 @@ button.video:hover {
     text-shadow: 0 0 7px rgba(0, 0, 0, 0.702);
 }
 
-.videobox{
-    display: flex;
-    justify-content: center;
-}
+
